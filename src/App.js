@@ -13,9 +13,16 @@ class App extends React.Component {
 	
 	save=(e)=>{
 		sessionStorage.setItem("key", this.state.val);
+		alert('Saved');
 	}
 	remove=(e)=>{
 		sessionStorage.removeItem("key");
+		alert('Removed');
+	}
+	show=(e)=>{
+		let value = sessionStorage.getItem("key");
+		this.setState({val:value});
+		alert('Stored value is ' + value);
 	}
 	render(){
   return (
@@ -27,6 +34,7 @@ class App extends React.Component {
 			}/>
             <button onClick={this.save}>Save</button>
 			<button onClick={this.remove}>Remove</button>
+			<button onClick={this.show}>Retrieve</button>
       </header>
     </div>
   );
