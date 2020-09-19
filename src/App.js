@@ -2,25 +2,35 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+class App extends React.Component {
+	constructor(props) {
+    super(props);
+    this.state = {
+      val: sessionStorage.getItem('key'),
+    }
+
+  }
+	
+	save=(e)=>{
+		sessionStorage.setItem("key", this.state.val);
+	}
+	remove=(e)=>{
+		sessionStorage.removeItem("key");
+	}
+	render(){
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+	        <input type="text" value={this.state.val} onChange={(event)=>{
+				this.setState({val:event.target.value});
+			}
+			}/>
+            <button onClick={this.save}>Save</button>
+			<button onClick={this.remove}>Remove</button>
       </header>
     </div>
   );
+	}
 }
 
 export default App;
